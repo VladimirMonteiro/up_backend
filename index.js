@@ -35,7 +35,7 @@ app.get('/products', async (req,res)=> {
     
     await Product.find().then((products) => {
         
-        return res.json({erro: false, products, url: "https://squid-app-whqlo.ondigitalocean.app/files/products/" })
+        return res.json({erro: false, products, url: process.env.URL_PRODUCTS })
 
     }).catch(err => console.log(err))
   
