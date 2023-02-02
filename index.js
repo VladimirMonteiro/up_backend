@@ -18,7 +18,7 @@ const createProductRouter = require('./routes/createProduct')
 
 
 app.use('/files',express.static(path.resolve(__dirname,'public', "images")))
-app.use(cors({credentials:true, origin: 'https://monkfish-app-l8gd4.ondigitalocean.app/'}))
+app.use(cors({credentials:true, origin: 'http://localhost:3000'}))
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
@@ -47,6 +47,7 @@ app.get('/products', async (req,res)=> {
 
 
 })
+
 
     app.listen(port , () => {
         console.log(`servidor rodando na porta ${port}`)
