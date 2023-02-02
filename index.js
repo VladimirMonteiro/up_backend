@@ -5,6 +5,9 @@ const path = require('path')
 const app =  express()
 const nodemailer = require('nodemailer')
 
+const port = process.env.PORT || 8000
+
+
 const conn = require('./db/conn')
 const Product = require('./models/Product')
 
@@ -50,8 +53,8 @@ app.get('/products', async (req,res)=> {
 
 
 
-    app.listen(5000, () => {
-        console.log('Server On')
+    app.listen(port , () => {
+        console.log(`servidor rodando na porta ${port}`)
      })
 
 
