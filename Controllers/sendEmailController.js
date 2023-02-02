@@ -11,12 +11,12 @@ module.exports = class sendEmailController {
     
     
     const transporter = nodemailer.createTransport({
-        host: smpt_config.HOST,
-        port: smpt_config.PT,
+        host: smpt_config.host,
+        port: smpt_config.port,
         secure:false,
         auth:{
-            user: smpt_config.USER,
-            pass: smpt_config.PASS
+            user: smpt_config.user,
+            pass: smpt_config.pass
         },
         tls:{
             rejectUnauthorized:false
