@@ -23,6 +23,7 @@ const client = new MongoClient (`mongodb+srv://${process.env.DB_USER}:${process.
 })
 
 client.connect().then(() => {
+    db = client.db('admin')
     console.log('Conectado ao mongoDB')
 }).catch(err => console.log(err))
 
