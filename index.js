@@ -18,7 +18,7 @@ const createProductRouter = require('./routes/createProduct')
 
 
 app.use('/files',express.static(path.resolve(__dirname,'public', "images")))
-app.use(cors({credentials:true, origin: 'https://coral-app-kdbds.ondigitalocean.app/'}))
+app.use(cors({credentials:true, origin: 'https://monkfish-app-l8gd4.ondigitalocean.app/produtos'}))
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
