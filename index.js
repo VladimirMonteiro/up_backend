@@ -18,7 +18,7 @@ const createProductRouter = require('./routes/createProduct')
 
 
 app.use('/files',express.static(path.resolve(__dirname,'public', "images")))
-app.use(cors({credentials:true, origin: 'http://localhost:3000'}))
+app.use(cors({credentials:true, origin: 'https://coral-app-kdbds.ondigitalocean.app/'}))
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
@@ -35,7 +35,7 @@ app.get('/products', async (req,res)=> {
     
     await Product.find().then((products) => {
         
-        return res.json({erro: false, products, url: "https://urchin-app-dbpew.ondigitalocean.app/files/products/" })
+        return res.json({erro: false, products, url: "http://localhost:5000/files/products/" })
 
     }).catch(err => console.log(err))
   
@@ -49,10 +49,12 @@ app.get('/products', async (req,res)=> {
 })
 
 
+
+
+
+
     app.listen(port , () => {
         console.log(`servidor rodando na porta ${port}`)
      })
 
 
-
- 
