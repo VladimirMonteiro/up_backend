@@ -12,7 +12,7 @@ module.exports = class sendEmailController {
     
     const transporter = nodemailer.createTransport({
         host: smpt_config.host,
-        port: smpt_config.port,
+        port: smpt_config.PT,
         secure:false,
         auth:{
             user: smpt_config.user,
