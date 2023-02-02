@@ -3,7 +3,7 @@ const express = require ('express')
 const cors = require ('cors')
 const path = require('path')
 const app =  express()
-const nodemailer = require('nodemailer')
+
 
 const port = process.env.PORT || 8000
 
@@ -18,7 +18,7 @@ const createProductRouter = require('./routes/createProduct')
 
 
 app.use('/files',express.static(path.resolve(__dirname,'public', "images")))
-app.use(cors({credentials:true, origin: 'https://monkfish-app-l8gd4.ondigitalocean.app'}))
+app.use(cors({credentials:true, origin: process.env.ORIGIN}))
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
