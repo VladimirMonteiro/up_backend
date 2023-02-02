@@ -18,7 +18,7 @@ const createProductRouter = require('./routes/createProduct')
 
 
 app.use('/files',express.static(path.resolve(__dirname,'public', "images")))
-app.use(cors({credentials:true, origin: 'http://localhost:3000'}))
+
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
