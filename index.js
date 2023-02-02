@@ -48,14 +48,10 @@ app.get('/products', async (req,res)=> {
 
 })
 
-
-
-
-conn.then(() =>{
     app.listen(port , () => {
         console.log(`servidor rodando na porta ${port}`)
      })
 
-})
+
 
  
