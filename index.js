@@ -18,7 +18,7 @@ const createProductRouter = require('./routes/Products')
 
 
 
-app.use(cors({credentials:true, origin:'https://up-locations-jc882du9o-vladimirmonteiro.vercel.app'}))
+app.use(cors({credentials:true, origin:'https://up-locations.vercel.app'}))
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 app.use(express.static(path.join(__dirname, 'public')))
