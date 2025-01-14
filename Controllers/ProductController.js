@@ -86,4 +86,70 @@ module.exports = class ProductController {
             
         }
     }
+
+    static async searchProduct(req, res) {
+
+        console.log("test")
+        try {
+            // Recebe os parâmetros da query string
+            const { query, page = 1, limit = 10 } = req.query;
+    
+            // Validação do termo de pesquisa
+            if (!query || query.trim() === "") {
+                return res.status(400).json({ message: 'Por favor, forneça um termo de pesquisa válido.' });
+            }
+    
+            // Validação da página e limite
+            const pageNumber = parseInt(page);
+            const limitNumber = parseInt(limit);
+    
+            if (isNaN(pageNumber) || pageNumber <= 0) {
+                return res.status(400).json({ message: 'Número da página inválido.' });
+            }
+    
+            if (isNaN(limitNumber) || limitNumber <= 0) {
+                return res.status(400).json({ message: 'Número de itens por página inválido.' });
+            }
+    
+            // Cálculo do valor de skip baseado na página e no limite
+            const skip = (pageNumber - 1) * limitNumber;
+    
+            // Realiza a busca com o termo fornecido
+            const products = await Product.find({
+                name: { $regex: query, $options: 'i' } // A pesquisa será feita de forma insensível ao caso
+            })
+            .skip(skip)
+            .limit(limitNumber);
+    
+            // Se não houver produtos encontrados
+            if (products.length === 0) {
+                return res.status(404).json({ message: 'Nenhum produto encontrado.' });
+            }
+    
+            // Contagem do número total de produtos para paginar corretamente
+            const totalProducts = await Product.countDocuments({
+                name: { $regex: query, $options: 'i' }
+            });
+    
+            // Cálculo das páginas totais
+            const totalPages = Math.ceil(totalProducts / limitNumber);
+    
+            // Retorno dos resultados e informações de paginação
+            return res.status(200).json({
+                products,
+                pagination: {
+                    totalProducts,
+                    totalPages,
+                    currentPage: pageNumber,
+                    limit: limitNumber
+                }
+            });
+    
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ message: 'Houve um erro ao buscar os produtos, tente novamente mais tarde.' });
+        }
+    }
+    
+    
 }

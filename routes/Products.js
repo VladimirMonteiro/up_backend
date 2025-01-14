@@ -9,7 +9,9 @@ const ProductController = require('../Controllers/ProductController')
 
 router.post('/created',upload.single('image'), ProductController.create)
 router.get('/productdetails/:id', ProductController.getProductById)
+router.get('/search', ProductController.searchProduct)
 router.get('/', ProductController.showProducts )
+
 
 
 
