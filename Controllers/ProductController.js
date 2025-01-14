@@ -36,18 +36,40 @@ module.exports = class ProductController {
     }
 
     static async showProducts(req, res) {
-
         try {
+            // Obtém a página e o número de itens por página a partir dos parâmetros da requisição
+            const page = parseInt(req.query.page) || 1;  // Página atual (default: 1)
+            const limit = parseInt(req.query.limit) || 10;  // Número de itens por página (default: 10)
+            
+            // Calcula o índice do primeiro item para a página atual
+            const skip = (page - 1) * limit;
+    
+            // Obtém os produtos com a paginação
             const products = await Product.find()
-
-            res.status(200).json(products)
-            
+                .skip(skip)  // Pula os itens já exibidos nas páginas anteriores
+                .limit(limit);  // Limita o número de itens por página
+    
+            // Conta o total de produtos para calcular o número total de páginas
+            const totalProducts = await Product.countDocuments();
+    
+            // Envia a resposta com os produtos e informações de paginação
+            res.status(200).json({
+                products,
+                pagination: {
+                    totalProducts,
+                    totalPages: Math.ceil(totalProducts / limit),
+                    currentPage: page,
+                    itemsPerPage: limit
+                }
+            });
         } catch (error) {
-            console.log(err)
-            res.status(401).json({message: 'Houve um problema, tente mais tarde!'})
-            
+            console.log(error);
+            res.status(401).json({ message: 'Houve um problema, tente mais tarde!' });
         }
+
+        console.log("chegou aki")
     }
+    
 
     static async getProductById(req,res){
 
@@ -63,9 +85,5 @@ module.exports = class ProductController {
             res.status(422).json({message: error})
             
         }
-
-        
-
-
     }
 }
