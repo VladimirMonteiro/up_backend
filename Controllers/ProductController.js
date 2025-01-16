@@ -38,8 +38,8 @@ module.exports = class ProductController {
     static async showProducts(req, res) {
         try {
             // Obtém a página e o número de itens por página a partir dos parâmetros da requisição
-            const page = parseInt(req.query.page) || 1;  // Página atual (default: 1)
-            const limit = parseInt(req.query.limit) || 10;  // Número de itens por página (default: 10)
+            const page = parseInt(req.query.page);  // Página atual (default: 1)
+            const limit = parseInt(req.query.limit);  // Número de itens por página (default: 10)
             
             // Calcula o índice do primeiro item para a página atual
             const skip = (page - 1) * limit;
