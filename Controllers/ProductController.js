@@ -92,7 +92,7 @@ module.exports = class ProductController {
         console.log("test")
         try {
             // Recebe os parâmetros da query string
-            const { query, page = 1, limit = 10 } = req.query;
+            const { query, page, limit} = req.query;
     
             // Validação do termo de pesquisa
             if (!query || query.trim() === "") {
